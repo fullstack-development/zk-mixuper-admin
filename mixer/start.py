@@ -23,7 +23,7 @@ class MixerStart(SubmitTx):
         self.mixer_address = Address(
             payment_part=self.mixer_script_hash, network=self.network)
         self.script_start_slot = script_start_slot
-        self.mixer_datum = MixerDatum(nullifierHashes=[])
+        self.mixer_datum = MixerDatum(nullifierHashes=IndefiniteList([]))
 
     def start_mixer(self):
         # Create a locking script that hold mixer script and also mints mixer NFT
