@@ -40,3 +40,13 @@ Do only 3. step from setup.
 ```sh
 deactivate
 ```
+
+### Prepare environment
+
+Copy template:
+
+```sh
+cp template.env .env
+```
+
+And modify variables there
