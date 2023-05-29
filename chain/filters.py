@@ -1,4 +1,4 @@
-"""Implementing Oracle checks and filters"""
+"""Implementing Mixer checks and filters"""
 from typing import List
 from pycardano import UTxO, MultiAsset, ScriptHash, plutus_script_hash, PlutusV2Script
 import cbor2

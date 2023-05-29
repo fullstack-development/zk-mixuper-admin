@@ -1,5 +1,5 @@
 """offchain code containing mint class"""
-from pycardano import (Network, Address, PaymentVerificationKey, PaymentSigningKey,
+from pycardano import (Network, PaymentVerificationKey, PaymentSigningKey,
                        TransactionOutput, TransactionBuilder, Value,
                        MultiAsset, ScriptPubkey,
                        InvalidHereAfter, ScriptAll)
@@ -19,9 +19,6 @@ class Mint(SubmitTx):
                  verification_key: PaymentVerificationKey,
                  ) -> None:
         super().__init__(network, context, signing_key, verification_key)
-        self.pub_key_hash = self.verification_key.hash()
-        self.address = Address(
-            payment_part=self.pub_key_hash, network=self.network)
 
     def mint_nft_with_script(self):
         """mint tokens with native script"""
@@ -37,10 +34,10 @@ class Mint(SubmitTx):
 
         policy_id = policy.hash()
 
-        oracle_nft = MultiAsset.from_primitive(
+        mixer_nft = MultiAsset.from_primitive(
             {
                 policy_id.payload: {
-                    b"Oracle Protocol Token #1": 1,  # Name of our token  # Quantity of this token
+                    b"Mixer Protocol Token #1": 1,  # Name of our token  # Quantity of this token
                 }
             }
         )
@@ -57,14 +54,14 @@ class Mint(SubmitTx):
         builder.ttl = valid_before_slot.after
 
         # Set nft we want to mint
-        builder.mint = oracle_nft
+        builder.mint = mixer_nft
 
         # Set native script
         builder.native_scripts = [policy]
 
         # Send the NFT to our own address
         nft_output = TransactionOutput(
-            self.address, Value(2000000, oracle_nft))
+            self.address, Value(2000000, mixer_nft))
         builder.add_output(nft_output)
 
         self.submit_tx_builder(builder)
