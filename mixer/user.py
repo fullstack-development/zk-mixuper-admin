@@ -1,6 +1,6 @@
 from copy import deepcopy
 from pycardano import (UTxO, ScriptHash, Network, Address, PaymentVerificationKey, PaymentSigningKey,
-                       TransactionBuilder, Redeemer, RedeemerTag, MultiAsset, plutus_script_hash, Value
+                       TransactionBuilder, Redeemer, MultiAsset, plutus_script_hash, Value
                        )
 from chain import ChainQuery, SubmitTx, filter_utxos_by_asset, filter_utxos_by_script_hash
 from .datums import MixerDatum, Deposit, MixerConfig

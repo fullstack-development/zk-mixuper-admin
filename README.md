@@ -99,3 +99,11 @@ Owner wallet needs to run:
 ```sh
 python run_start.py
 ```
+
+### Depositing into mixer
+
+User wallet needs to run:
+
+```sh
+python run_deposit.py
+```
