@@ -16,5 +16,10 @@ owner_pub_key_hash = owner_verification_key.hash()
 owner_address = Address(
     payment_part=owner_pub_key_hash, network=network)
 
+user_verification_key = PaymentVerificationKey.load("user.vkey")
+user_pub_key_hash = user_verification_key.hash()
+user_address = Address(
+    payment_part=user_pub_key_hash, network=network)
+
 deposit = Deposit(bytes())
 print(deposit.to_cbor_hex())
