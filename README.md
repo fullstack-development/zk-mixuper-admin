@@ -73,6 +73,14 @@ It will generate and print important parameters which should be saved for later 
 
 After that owner needs to copy printed parameters and consult on-chain deposit [readme](https://github.com/fullstack-development/tornadano-on-chain-deposit/tree/master#usage) and withdraw [readme](https://github.com/fullstack-development/tornadano-on-chain/tree/master#usage).
 
+Printed parameters are supplied to minting policy. Then, to know minting policy id run:
+
+```sh
+python print_minting_policy_hash.py
+```
+
+This will provided another parameter for on-chain scripts, to compile them.
+
 ## Mixer related transactions
 
 ### Starting mixer
