@@ -15,3 +15,8 @@ class Deposit(PlutusData):
 @dataclass
 class Withdraw(PlutusData):
     CONSTR_ID = 1
+
+
+@dataclass
+class Unit(PlutusData):
+    CONSTR_ID = 0

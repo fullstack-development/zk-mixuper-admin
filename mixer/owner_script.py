@@ -1,6 +1,5 @@
 from typing import Tuple
-from pycardano import (Network, PaymentVerificationKey, ScriptAll, ScriptPubkey, NativeScript,
-                       InvalidBefore, PaymentSigningKey, TransactionBuilder, UTxO)
+from pycardano import (Network, PaymentVerificationKey, PaymentSigningKey, UTxO)
 from chain import ChainQuery, SubmitTx, filter_utxos_by_reference
 
 
@@ -22,7 +21,7 @@ class OwnerScript(SubmitTx):
         return (tx_id.payload.hex(), tx_index)
 
     def find_utxo(self, utxo_ref: Tuple[str, int]) -> UTxO:
-        utxos = self.context.utxos
+        utxos = self.context.utxos(self.address)
         [utxo] = filter_utxos_by_reference(utxos, utxo_ref)
         return utxo
 
