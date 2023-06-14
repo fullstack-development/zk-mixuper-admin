@@ -83,7 +83,7 @@ class ChainQuery(BlockFrostChainContext):
     def find_collateral(self, target_address):
         """return first output that contains no less that 5 ADA"""
         for utxo in self.utxos(str(target_address)):
-            if utxo.output.amount.coin >= 5000000:
+            if utxo.output.amount.coin >= 10000000:
                 return utxo
         return None
 
@@ -92,7 +92,7 @@ class ChainQuery(BlockFrostChainContext):
 
         collateral_builder.add_input_address(target_address)
         collateral_builder.add_output(
-            TransactionOutput(target_address, 5000000))
+            TransactionOutput(target_address, 10000000))
 
         self.submit_tx_with_print(
             collateral_builder.build_and_sign([skey], target_address))
