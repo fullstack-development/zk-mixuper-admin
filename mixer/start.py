@@ -61,7 +61,7 @@ class MixerStart(SubmitTx):
         mixer_nft = MultiAsset.from_primitive(
             {
                 owner_script_hash.payload: {
-                    b"Mixer Protocol Token": 1,  # Name of our token  # Quantity of this token
+                    b'Mixer Protocol Token': 1,  # Name of our token  # Quantity of this token
                 }
             }
         )

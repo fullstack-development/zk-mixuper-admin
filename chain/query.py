@@ -75,7 +75,9 @@ class ChainQuery(BlockFrostChainContext):
         print("############### Transaction created ###############")
         print(tx)
         print("############### Submitting transaction ###############")
-        self.submit_tx(tx.to_cbor())
+        cbor = tx.to_cbor()
+        print(cbor.hex())
+        self.submit_tx(cbor)
         self.wait_for_tx(str(tx.id))
 
     def find_collateral(self, target_address):
