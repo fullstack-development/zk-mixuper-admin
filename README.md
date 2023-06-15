@@ -90,4 +90,6 @@ Owner wallet needs to run:
 ```sh
 python run_mint.py
 python run_start.py
+python run_deploy_deposit.py
+python run_deploy_withdraw.py
 ```
