@@ -58,24 +58,7 @@ There are two main entry points to main functionality of this lib:
 1. A [class](mixer/start.py) for starting new mixer.
 2. A [class](mixer/user.py) for using already created mixer.
 
-Other functionality includes a [helper](mixer/nft_minter.py) to mint NFTs (which is not used inside mixer- classes, it can be used for minting C3 tokens later); and also a [owner script](mixer/owner_script.py) implementation. The idea of `OwnerScript` is that mixer owner can later spend his reference script deployment output, and also burn mixer NFT on close operation (that spends all mixer outputs). So "sig" here is mixer owners pub key hash, and "slot" is just to have a unique script hash.
-Here is a simple example script like this:
-
-```json
-{
-    "type": "all",
-    "scripts": [
-        {
-            "type": "sig",
-            "keyHash": "d1ce83174feeb6ae11d95fd47cac403642cb616b244dbb32a2ca0bda"
-        },
-        {
-            "slot": 16020635,
-            "type": "after"
-        }
-    ]
-}
-```
+Other functionality includes a [helper](mixer/nft_minter.py) to mint NFTs; and also a [owner script](mixer/owner_script.py) implementation. `OwnerScript` exists just to query owner wallet for a UTxO to reference during mixer NFT (protocol token) mint.
 
 ## Mixer script compilation & other preparations
 
@@ -88,7 +71,15 @@ python print_mixer_start_params.py
 
 It will generate and print important parameters which should be saved for later use. First, they are used as a mixer script parameter `MixerConfig`.
 
-After that owner needs to copy printed parameters and consult on-chain mixer [readme](https://github.com/fullstack-development/tornadano-on-chain/tree/master#usage).
+After that owner needs to copy printed parameters and consult on-chain deposit [readme](https://github.com/fullstack-development/tornadano-on-chain-deposit/tree/master#usage) and withdraw [readme](https://github.com/fullstack-development/tornadano-on-chain/tree/master#usage).
+
+Printed parameters are supplied to minting policy. Then, to know minting policy id run:
+
+```sh
+python print_minting_policy_hash.py
+```
+
+This will provided another parameter for on-chain scripts, to compile them.
 
 ## Mixer related transactions
 
@@ -97,13 +88,8 @@ After that owner needs to copy printed parameters and consult on-chain mixer [re
 Owner wallet needs to run:
 
 ```sh
+python run_mint.py
 python run_start.py
-```
-
-### Depositing into mixer
-
-User wallet needs to run:
-
-```sh
-python run_deposit.py
+python run_deploy_deposit.py
+python run_deploy_withdraw.py
 ```

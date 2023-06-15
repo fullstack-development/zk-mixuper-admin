@@ -4,3 +4,4 @@ __pycache__
 *.vkey
 *.skey
 *.plutus
+*.datum

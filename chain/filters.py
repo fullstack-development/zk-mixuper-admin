@@ -1,6 +1,6 @@
 """Implementing Mixer checks and filters"""
-from typing import List
-from pycardano import UTxO, MultiAsset, ScriptHash, plutus_script_hash, PlutusV2Script
+from typing import List, Tuple
+from pycardano import UTxO, MultiAsset, ScriptHash, plutus_script_hash, PlutusV2Script, TransactionInput, TransactionId
 import cbor2
 from copy import deepcopy
 
@@ -25,3 +25,9 @@ def fix_reference_script(utxo: UTxO, script_hash: ScriptHash) -> bool:
         plutus_script = PlutusV2Script(cbor2.dumps(utxo.output.script))
         utxo.output.script = plutus_script
     return plutus_script_hash(utxo.output.script) == script_hash
+
+
+def filter_utxos_by_reference(utxos: List[UTxO], ref: Tuple[str, int]):
+    """filter list of UTxOs by reference"""
+    id_hex, tx_index = ref
+    return list(filter(lambda u: u.input.index == tx_index and u.input.transaction_id.payload.hex() == id_hex, utxos))
