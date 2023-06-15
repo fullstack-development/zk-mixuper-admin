@@ -16,6 +16,7 @@ owner_signing_key = PaymentSigningKey.load("owner.skey")
 
 mixer_owner = OwnerScript(
     network, context, owner_signing_key, owner_verification_key)
+    
 # Mixer Creator: d1ce83174feeb6ae11d95fd47cac403642cb616b244dbb32a2ca0bda
-# Mixer NFT UTxO reference has id: 14f777f08e9c360233452b6419add63df693518475cef56d697863ef5a160b6c index: 0
+# Mixer NFT UTxO reference has id: 2dba01b0cb2aba71b026d8aeac057ce9249f82dacb78a216b34fee4d52bfb909 index: 2
 mixer_owner.print_start_params()

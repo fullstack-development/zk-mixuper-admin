@@ -1,7 +1,7 @@
 from dotenv import load_dotenv
 import cbor2
 from pycardano import (Network, Address, PaymentVerificationKey, PaymentSigningKey,
-                       PlutusV2Script)
+                       PlutusV2Script, PlutusV1Script, plutus_script_hash, PlutusData)
 import os
 from mixer import MixerStart
 from chain import ChainQuery
@@ -18,11 +18,26 @@ owner_verification_key = PaymentVerificationKey.load("owner.vkey")
 owner_pub_key_hash = owner_verification_key.hash()
 owner_address = Address(payment_part=owner_pub_key_hash, network=network)
 
-with open("./mixerScript.plutus", "r") as f:
+with open("./depositScript.plutus", "r") as f:
     script_hex = f.read()
-    mixer_script = PlutusV2Script(cbor2.loads(bytes.fromhex(script_hex)))
-script_start_slot = 29667384
+    deposit_script = PlutusV2Script(cbor2.loads(bytes.fromhex(script_hex)))
+deposit_script_hash = plutus_script_hash(deposit_script)
+
+with open("./withdrawScript.plutus", "r") as f:
+    script_hex = f.read()
+    withdraw_script = PlutusV2Script(cbor2.loads(bytes.fromhex(script_hex)))
+withdraw_script_hash = plutus_script_hash(withdraw_script)
+
+utxo_ref = ('2dba01b0cb2aba71b026d8aeac057ce9249f82dacb78a216b34fee4d52bfb909', 2)
+
+with open("./mintingPolicy.plutus", "r") as f:
+    script_hex = f.read()
+    minting_script = PlutusV1Script(cbor2.loads(bytes.fromhex(script_hex)))
+
+with open("./depositTree.datum", "r") as f:
+    datum_hex = f.read()
+    deposit_tree_datum = PlutusData.from_cbor(bytes.fromhex(datum_hex))
 
 start = MixerStart(network=network, context=context, signing_key=owner_signing_key,
-                    verification_key=owner_verification_key, mixer_script=mixer_script, script_start_slot=script_start_slot)
-start.start_mixer()
+                    verification_key=owner_verification_key)
+start.start_mixer(utxo_ref, minting_script, deposit_script_hash, withdraw_script_hash, deposit_tree_datum)

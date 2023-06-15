@@ -3,7 +3,7 @@ from pycardano import (Network, Address, Redeemer, PlutusV1Script, PaymentVerifi
                        TransactionOutput, TransactionBuilder, Value, datum_hash, MultiAsset, PlutusV2Script, plutus_script_hash)
 from pycardano.serialization import IndefiniteList
 from chain import ChainQuery, SubmitTx
-from .datums import DepositDatum, Vault, WithdrawDatum, Unit
+from .datums import DepositTree, Vault, WithdrawDatum, Unit
 from .owner_script import OwnerScript
 
 
@@ -20,7 +20,7 @@ class MixerStart(SubmitTx):
         super().__init__(network, context, signing_key, verification_key)
 
     def start_mixer(self, owner_utxo_ref: Tuple[str, int], plutus_minting_script: PlutusV1Script,
-                    deposit_script_hash: ScriptHash, withdraw_script_hash: ScriptHash, deposit_tree_datum: DepositDatum):
+                    deposit_script_hash: ScriptHash, withdraw_script_hash: ScriptHash, deposit_tree_datum):
         # Create a script that mints mixer NFT
         owner = OwnerScript(self.network, self.context,
                             self.signing_key, self.verification_key)
