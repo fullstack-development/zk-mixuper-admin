@@ -1,7 +1,7 @@
 from dotenv import load_dotenv
 import cbor2
 from pycardano import (Network, Address, PaymentVerificationKey, PaymentSigningKey,
-                       PlutusV2Script, PlutusV1Script, plutus_script_hash, PlutusData)
+                       PlutusV2Script, PlutusV1Script, plutus_script_hash, RawPlutusData)
 import os
 from mixer import MixerStart
 from chain import ChainQuery
@@ -35,7 +35,7 @@ minting_script_hash = plutus_script_hash(minting_script)
 
 with open("./depositTree.datum", "r") as f:
     datum_hex = f.read()
-    deposit_tree_datum = PlutusData.from_cbor(bytes.fromhex(datum_hex))
+    deposit_tree_datum = RawPlutusData.from_cbor(bytes.fromhex(datum_hex))
 
 start = MixerStart(network=network, context=context, signing_key=owner_signing_key,
                     verification_key=owner_verification_key)
