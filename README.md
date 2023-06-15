@@ -88,5 +88,6 @@ This will provided another parameter for on-chain scripts, to compile them.
 Owner wallet needs to run:
 
 ```sh
+python run_mint.py
 python run_start.py
 ```

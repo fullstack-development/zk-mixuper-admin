@@ -28,11 +28,10 @@ with open("./withdrawScript.plutus", "r") as f:
     withdraw_script = PlutusV2Script(cbor2.loads(bytes.fromhex(script_hex)))
 withdraw_script_hash = plutus_script_hash(withdraw_script)
 
-utxo_ref = ('2dba01b0cb2aba71b026d8aeac057ce9249f82dacb78a216b34fee4d52bfb909', 2)
-
 with open("./mintingPolicy.plutus", "r") as f:
     script_hex = f.read()
     minting_script = PlutusV1Script(cbor2.loads(bytes.fromhex(script_hex)))
+minting_script_hash = plutus_script_hash(minting_script)
 
 with open("./depositTree.datum", "r") as f:
     datum_hex = f.read()
@@ -40,4 +39,4 @@ with open("./depositTree.datum", "r") as f:
 
 start = MixerStart(network=network, context=context, signing_key=owner_signing_key,
                     verification_key=owner_verification_key)
-start.start_mixer(utxo_ref, minting_script, deposit_script_hash, withdraw_script_hash, deposit_tree_datum)
+start.start_mixer(minting_script_hash, deposit_script_hash, withdraw_script_hash, deposit_tree_datum)

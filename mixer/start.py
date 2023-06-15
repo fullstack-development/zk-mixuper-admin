@@ -19,53 +19,36 @@ class MixerStart(SubmitTx):
                  ) -> None:
         super().__init__(network, context, signing_key, verification_key)
 
-    def start_mixer(self, owner_utxo_ref: Tuple[str, int], plutus_minting_script: PlutusV1Script,
+    def start_mixer(self, protocol_policy_id: ScriptHash,
                     deposit_script_hash: ScriptHash, withdraw_script_hash: ScriptHash, deposit_tree_datum):
-        # Create a script that mints mixer NFT
-        owner = OwnerScript(self.network, self.context,
-                            self.signing_key, self.verification_key)
-        utxo = owner.find_utxo(owner_utxo_ref)
-        policy = plutus_minting_script
-        policy_id = plutus_script_hash(policy)
-        print(f"Protocol token Policy id: {policy_id.payload.hex()}")
-
         # Create a transaction builder
         builder = TransactionBuilder(self.context)
 
         # Add our own address as the input address
-        builder.add_input(utxo)
         builder.add_input_address(self.address)
 
-        ############ Mixer NFT minting: ############
+        ############ Mixer NFTs: ############
         deposit_tree_token = MultiAsset.from_primitive(
             {
-                policy_id.payload: {
+                protocol_policy_id.payload: {
                     b"Deposit Tree Token": 1,
                 }
             }
         )
         vault_token = MultiAsset.from_primitive(
             {
-                policy_id.payload: {
+                protocol_policy_id.payload: {
                     b"Vault Token": 1,
                 }
             }
         )
         nullifier_store_token = MultiAsset.from_primitive(
             {
-                policy_id.payload: {
+                protocol_policy_id.payload: {
                     b"Nullifier Store Token": 1,
                 }
             }
         )
-        mixer_nfts = deposit_tree_token + vault_token + nullifier_store_token
-
-        # Set nft we want to mint
-        builder.mint = mixer_nfts
-
-        # Set plutus mint script
-        builder.add_minting_script(
-            script=plutus_minting_script, redeemer=Redeemer(data=Unit()))
 
         ############ Mixer first outputs creation: ############
         deposit_script_address = Address(
