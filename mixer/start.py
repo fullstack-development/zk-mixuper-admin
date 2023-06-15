@@ -64,14 +64,14 @@ class MixerStart(SubmitTx):
         # Deposit Tree
         print(f"Deposit Tree datum hash: {datum_hash(deposit_tree_datum)}")
         deposit_tree_output = TransactionOutput(datum=deposit_tree_datum,
-                                                address=deposit_script_address, amount=Value(2000000, deposit_tree_token))
+                                                address=deposit_script_address, amount=Value(28000000, deposit_tree_token))
         builder.add_output(deposit_tree_output)
 
         # Vault
         vault_datum = Vault()
         print(f"Vault datum hash: {datum_hash(vault_datum)}")
         vault_output = TransactionOutput(datum=vault_datum,
-                                         address=deposit_script_address, amount=Value(2000000, vault_token))
+                                         address=deposit_script_address, amount=Value(28000000, vault_token))
         builder.add_output(vault_output)
 
         # Nullifier Store
@@ -80,7 +80,7 @@ class MixerStart(SubmitTx):
         print(
             f"Nullifier Store datum hash: {datum_hash(nullifier_store_datum)}")
         nullifier_store_output = TransactionOutput(datum=nullifier_store_datum,
-                                                   address=withdraw_script_address, amount=Value(2000000, nullifier_store_token))
+                                                   address=withdraw_script_address, amount=Value(28000000, nullifier_store_token))
         builder.add_output(nullifier_store_output)
 
         builder.required_signers = [self.pub_key_hash]
