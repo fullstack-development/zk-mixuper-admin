@@ -31,11 +31,9 @@ deposit_tree_token_unit = policy_id + b'Deposit Tree Token'.hex()
 nullifier_store_token_unit = policy_id + b'Nullifier Store Token'.hex()
 
 zero_leaf = 'tornado.cash on cardano'
-tree_height = 7
 
 pool_config = {
   'zeroValue': zero_leaf,
-  'treeHeight': tree_height,
   'depositScript': deposit_script_conf,
   'withdrawScript': withdraw_script_conf,
   'vaultTokenUnit': vault_token_unit,
