@@ -7,5 +7,5 @@ with open("./mintingPolicy.plutus", "r") as f:
 
 policy_id = plutus_script_hash(minting_script)
 
-# Minting policy id: 9ed52df2a82639104da88a79393d4e541c7da3065be708e89f83c775
+# Minting policy id: 7e0e1e67a5d0c511f149f9aaba428ff94b5092956b1057e67b2d4967
 print(f'Minting policy id: {policy_id}')
