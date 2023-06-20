@@ -15,7 +15,7 @@ context = ChainQuery(os.environ['BLOCKFROST_PROJECT_ID'],
 owner_verification_key = PaymentVerificationKey.load("owner.vkey")
 owner_signing_key = PaymentSigningKey.load("owner.skey")
 
-utxo_ref = ('93c7527ee2d0b86de5b73baa04728bc8cdf76cf055e4bf30f495d101fa37ff8d', 1)
+utxo_ref = ('b14a5fed236a0d53ecbec144994bdc4e7648a51a98bcfb23239104698d75a4db', 1)
 
 with open("./mintingPolicy.plutus", "r") as f:
     script_hex = f.read()
