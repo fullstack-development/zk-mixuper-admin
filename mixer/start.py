@@ -103,7 +103,7 @@ class MixerStart(SubmitTx):
         # Reference script output
         reference_script_utxo = TransactionOutput(
             address=deposit_script_address,
-            amount=25000000,
+            amount=31000000,
             script=deposit_script
         )
 
