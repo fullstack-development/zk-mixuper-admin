@@ -18,5 +18,5 @@ mixer_owner = OwnerScript(
     network, context, owner_signing_key, owner_verification_key)
 
 # Mixer Creator: d1ce83174feeb6ae11d95fd47cac403642cb616b244dbb32a2ca0bda
-# Mixer NFT UTxO reference has id: 93c7527ee2d0b86de5b73baa04728bc8cdf76cf055e4bf30f495d101fa37ff8d index: 1
+# Mixer NFT UTxO reference has id: b7d8e698fdd2f31a55e0a44cd3091b46b9917182960b86271d7f7f2dd5b5b263 index: 1
 mixer_owner.print_start_params()
