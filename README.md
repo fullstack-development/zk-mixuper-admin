@@ -1,4 +1,4 @@
-# Admin tools for tornadano
+# Admin tools for zk-mixuper
 
 ## Local development with IDE
 
@@ -71,7 +71,7 @@ python print_mixer_start_params.py
 
 It will generate and print important parameters which should be saved for later use. First, they are used as a mixer script parameter `MixerConfig`.
 
-After that owner needs to copy printed parameters and consult on-chain deposit [readme](https://github.com/fullstack-development/tornadano-on-chain-deposit/tree/master#usage) and withdraw [readme](https://github.com/fullstack-development/tornadano-on-chain/tree/master#usage).
+After that owner needs to copy printed parameters and consult on-chain deposit [readme](https://github.com/fullstack-development/zk-mixuper-deposit/tree/master#usage) and withdraw [readme](https://github.com/fullstack-development/zk-mixuper-on-chain/tree/master#usage).
 
 Printed parameters are supplied to minting policy. Then, to know minting policy id run:
 
