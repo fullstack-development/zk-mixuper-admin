@@ -1,5 +1,6 @@
 asn1crypto==1.5.1
 astroid==2.15.5
+asyncio==3.4.3
 attrs==23.1.0
 autopep8==2.0.2
 blockfrost-python==0.5.3
