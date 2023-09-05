@@ -5,3 +5,4 @@ __pycache__
 *.skey
 *.plutus
 *.datum
+*.payload

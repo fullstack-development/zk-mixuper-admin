@@ -36,7 +36,7 @@ class User(SubmitTx):
             payment_part=self.script_hash, network=self.network
         )
 
-    def lock_42(self) -> None:
+    def lock_42(self, lovelace) -> None:
         datum = Unit()
 
         # Create a transaction builder
@@ -47,7 +47,7 @@ class User(SubmitTx):
 
         # Add script output
         script_out = TransactionOutput(
-            self.script_address, Value(15_000_000), datum_hash=datum_hash(datum)
+            self.script_address, Value(lovelace), datum_hash=datum_hash(datum)
         )
         builder.add_output(script_out)
 
@@ -82,4 +82,5 @@ class User(SubmitTx):
 
         builder.required_signers = [self.pub_key_hash]
 
-        self.build_tx(builder)
+        tx = self.build_tx(builder)
+        return tx
